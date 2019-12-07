@@ -1,4 +1,4 @@
-console.log('Hello TensorFlow');
+console.log("Hello Tensorflow");
 
 import {MnistData} from './data.js';
 
@@ -30,22 +30,6 @@ async function showExamples(data) {
     imageTensor.dispose();
   }
 }
-
-async function run() {  
-  const data = new MnistData();
-  await data.load();
-  await showExamples(data);
-
-const model = getModel();
-tfvis.show.modelSummary({name: 'Model Architecture'}, model);
-  
-await train(model, data);
-
-await showAccuracy(model, data);
-await showConfusion(model, data);
-}
-
-document.addEventListener('DOMContentLoaded', run);
 
 function getModel() {
   const model = tf.sequential();
@@ -143,6 +127,24 @@ async function train(model, data) {
     callbacks: fitCallbacks
   });
 }
+
+async function run() {  
+  const data = new MnistData();
+  await data.load();
+  await showExamples(data);
+    
+    const model = getModel();
+tfvis.show.modelSummary({name: 'Model Architecture'}, model);
+  
+await train(model, data);
+    
+    await showAccuracy(model, data);
+await showConfusion(model, data);
+}
+
+
+
+document.addEventListener('DOMContentLoaded', run);
 
 const classNames = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine'];
 
